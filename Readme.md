@@ -8,9 +8,9 @@ https://github.com/jdhxyy/ssd1306py-micropython
 BTW Hi kudos for the author, but when I needed to update the values on the screen it took a lot of time updating on the screen,
 which was almost 3 seconds to update 3 screens, so with the notes of ```https://github.com/ch686``` I have worked out this library.
 ## installation
-Currently, the installation is only manual, I will be working one the setup later.
+Currently, the installation is only manual, I will be working on the setup later.
 
-This library is based on the Adafruit SSD1306 library:
+This library is based on the Adafruit SSD1306 library, uninstall the Adafuit library if installed to save space:
 ```html
 https://github.com/adafruit/micropython-adafruit-ssd1306.git
 ```
