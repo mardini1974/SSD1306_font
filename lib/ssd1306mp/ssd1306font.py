@@ -35,17 +35,18 @@ class ssd1306font(SSD1306_I2C):
         if font_size == 8:
             self.text(string, x, y)
             return
+        self.load_font(font_size)
         self._display(string, x, y, font_size)
 
     def _get_ch(self, ch, font_size):
-
-        if self._file is None:
-            self._file = open('lib/ssd1306mp/Ascii{}.bin'.format(font_size), 'rb')
-        data = self._file.read()
-        # offset  = (bytes per font height * pixel per width of font) = (font_size /8) * ( font_size /2)
         offset = font_size * font_size // 16
         index = (ord(ch) - 32) * offset
-        return data[index: index + offset]
+        return self.data["{}".format(font_size)][index: index + offset]
+
+    def load_font(self, font_size):
+        if not "{}".format(font_size) in self.data:
+            with open('lib/ssd1306mp/Ascii{}.bin'.format(font_size), 'rb') as file:
+                self.data["{}".format(font_size)] = file.read()
 
     def _display(self, string, x_axis, y_axis, font_size):
         offset = 0
