@@ -14,7 +14,7 @@ class ssd1306font(SSD1306_I2C):
         self.height = height
         self.i2c = i2c
         self._file = None
-
+        self.data = {}
         super().__init__(self.width, self.height, self.i2c)
 
     def clear(self):
