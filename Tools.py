@@ -4,7 +4,7 @@ Copyright 2023-2024 . All rights reserved.
 Author = Masoun Mardini
 """
 
-import pyperclip
+# import pyperclip
 
 
 def Convert_TXT2BIN(font_size):
@@ -41,5 +41,7 @@ def Printable_alphabet():
     alphabet_List = ''
     for i in range(32, 127):
         alphabet_List += ''.join(chr(i))
-    pyperclip.copy(alphabet_List)
+    # pyperclip.copy(alphabet_List)
+    print(alphabet_List)
 
+Printable_alphabet()

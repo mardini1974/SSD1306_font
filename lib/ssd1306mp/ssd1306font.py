@@ -21,21 +21,10 @@ class ssd1306font(SSD1306_I2C):
         """Clear screen"""
         self.fill(0)
 
-    def text_fb(self, string, x, y, font_size):
+    def text_fb(self, string, x, y, fontname):
         """Text using frame buffer command"""
-        if font_size != 8 and \
-                font_size != 16 and \
-                font_size != 24 and \
-                font_size != 32 and \
-                font_size != 40 and \
-                font_size != 48 and \
-                font_size != 64:
-            return
-
-        if font_size == 8:
-            self.text(string, x, y)
-            return
-        self.load_font(font_size)
+        
+        self.load_font(fontname=fontname)
         self._display(string, x, y, font_size)
 
     def _get_ch(self, ch, font_size):
@@ -43,10 +32,10 @@ class ssd1306font(SSD1306_I2C):
         index = (ord(ch) - 32) * offset
         return self.data["{}".format(font_size)][index: index + offset]
 
-    def load_font(self, font_size):
-        if not "{}".format(font_size) in self.data:
-            with open('lib/ssd1306mp/Ascii{}.bin'.format(font_size), 'rb') as file:
-                self.data["{}".format(font_size)] = file.read()
+    def load_font(self, fontname = 'lib/ssd1306mp/Ascii16.bin'):
+        if not fontname in self.data:
+            with open(fontname, 'rb') as file:
+                self.data[fontname] = file.read()
 
     def _display(self, string, x_axis, y_axis, font_size):
         offset = 0
