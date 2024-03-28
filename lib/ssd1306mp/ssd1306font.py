@@ -4,7 +4,7 @@ Copyright 2023-2024 . All rights reserved.
 Author = Masoun Mardini
 """
 
-from .ssd1306 import *
+from ssd1306 import *
 from framebuf import *
 
 
@@ -23,14 +23,15 @@ class ssd1306font(SSD1306_I2C):
 
     def text_fb(self, string, x, y, fontname):
         """Text using frame buffer command"""
-        
+        self.fontname = fontname
         self.load_font(fontname=fontname)
-        self._display(string, x, y, font_size)
+        fontsize = int(fontname[-6:-4])
+        self._display(string, x, y, fontsize)
 
     def _get_ch(self, ch, font_size):
         offset = font_size * font_size // 16
         index = (ord(ch) - 32) * offset
-        return self.data["{}".format(font_size)][index: index + offset]
+        return self.data[self.fontname][index: index + offset]
 
     def load_font(self, fontname = 'lib/ssd1306mp/Ascii16.bin'):
         if not fontname in self.data:
